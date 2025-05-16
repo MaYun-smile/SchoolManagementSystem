@@ -1,0 +1,39 @@
+
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Debug Vue App",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}/src",
+      "breakOnLoad": true,
+      "sourceMapPathOverrides": {
+        "webpack:///./src/*": "${webRoot}/*"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Server",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/server/src/index.js",
+      "outFiles": ["${workspaceFolder}/server/dist/**/*.js"],
+      "envFile": "${workspaceFolder}/server/.env"
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach to Server",
+      "port": 9229,
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Stack Debug",
+      "configurations": ["Debug Vue App", "Debug Server"]
+    }
+  ]
+}
